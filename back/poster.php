@@ -1,23 +1,26 @@
 <div style="height:340px;">
     <h3 class='ct'>預告片清單</h3>
-    <div style="display:flex; justify-content:space-betweem;text-align:center">
+    <div style="display:flex; justify-content:space-between;text-align:center
+">
         <div style="width:25%">預告片海報</div>
         <div style="width:25%">預告片片名</div>
         <div style="width:25%">預告片排序</div>
         <div style="width:24%">操作</div>
     </div>
+
     <form action="./api/edit_poster.php" method="post">
-        <div style="overflow:auto;height: 210px;">
+        <div style="overflow:auto;height:210px;">
             <?php
 $rows=$Poster->all();
 foreach($rows as $row):
 ?>
-            <div style="display:flex; justify-content:space-betweem;text-align:center">
+            <div style="display:flex; justify-content:space-between;text-align:center
+">
                 <div style="width:25%">
-                    <img src="./upload/<?=$row['img'];?>" style="width: 65px;">
+                    <img src="./upload/<?=$row['img'];?>" style="width:65px;">
                 </div>
                 <div style="width:25%">
-                    <input type="text" name="name" value="<?=$row['name'];?>">
+                    <input type="text" name="name[]" value="<?=$row['name'];?>">
                 </div>
                 <div style="width:25%">
                     <input type="button" value="往上">
@@ -32,9 +35,10 @@ foreach($rows as $row):
                         <option value="3" <?=($row['ani']==3)?"selected":"";?>>滑入滑出</option>
                     </select>
                 </div>
+                <input type="hidden" name="id[]" value="<?=$row['id'];?>">
             </div>
             <hr>
-            <?php
+            <?php 
 endforeach;
 ?>
         </div>

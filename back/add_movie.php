@@ -16,12 +16,11 @@
     padding: 5px;
 }
 </style>
+<form action="./api/add_movie.php" method="post" enctype="multipart/form-data">
 
-<form action="./api/add_movie.php" method="post" enctype="multpart-form-data">
-
-    <div style="width:95%;margin:auto;display:flex;">
-        <div style="width:10%">影片資料</div>
-        <div style="width:90%">
+    <div style="width:70%;margin:auto;display:flex;">
+        <div style="width:15%">影片資料</div>
+        <div style="width:85%">
             <div class="form">
                 <div>片名</div>：
                 <div><input type="text" name="name" id=""></div>
@@ -59,10 +58,10 @@
                     </select>月
                     <select name="day" id="">
                         <?php
-                        for($i=1;$i<=31;$i++){
-                            echo "<option value='$i'>$i</option>";
-                        }
-                        ?>
+                    for($i=1;$i<=31;$i++){
+                        echo "<option value='$i'>$i</option>";
+                    }
+                    ?>
                     </select>日
                 </div>
             </div>
@@ -80,14 +79,14 @@
             </div>
             <div class="form">
                 <div>電影海報</div>：
-                <div><input type="file" name="" id=""></div>
+                <div><input type="file" name="poster" id=""></div>
             </div>
         </div>
     </div>
     <div style="display:flex;width:70%;margin:auto;">
         <div style="width:15%;">劇情簡介</div>
-        <div style="width:85%;">
-            <textarea name="intro" id="" style="width:99%;"></textarea>
+        <div style="width:85%">
+            <textarea name="intro" id="" style="width:99%"></textarea>
         </div>
     </div>
     <div class="ct">

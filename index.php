@@ -1,4 +1,4 @@
-﻿<?php include_once "api/db.php" ;?>
+﻿﻿<?php include_once "api/db.php"; ?>
 <!DOCTYPE html
     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <!-- saved from url=(0047)? -->
@@ -15,13 +15,13 @@
 <body>
     <div id="main">
         <div id="top" class="ct" style=" background:#999 center; background-size:cover; " title="替代文字">
-            <h1>ABC影城</h1>
+            <h1 style="margin:0;padding:0">ABC影城</h1>
         </div>
         <div id="top2">
-            <a href="index.htm">首頁</a>
-            <a href="order.htm">線上訂票</a>
+            <a href="index.php">首頁</a>
+            <a href="order.php">線上訂票</a>
             <a href="#">會員系統</a>
-            <a href="back.htm">管理系統</a>
+            <a href="back.php">管理系統</a>
         </div>
         <div id="text"> <span class="ct">最新活動</span>
             <marquee direction="right">
@@ -30,19 +30,19 @@
         </div>
         <div id="mm">
             <?php 
+  
+    $do=$_GET['do']??'main';
+    $file="./front/$do.php";
 
-      $do=$_GET['do']??'main';
-      $file="./front/$do.php";
-
-      if(file_exists($file)){
-        include $file;
-      }else{
-        include "./front/main.php";
-      }
-
-
-
-    ?>
+    if(file_exists($file)){
+      include $file;
+    }else{
+      include "./front/main.php";
+    }
+  
+    
+  
+  ?>
         </div>
         <div id="bo"> ©Copyright 2010~2014 ABC影城 版權所有 </div>
     </div>

@@ -30,7 +30,7 @@ list($year,$month,$day)=explode("-",$row['ondate']);
         <div style="width:90%">
             <div class="form">
                 <div>片名</div>：
-                <div><input type="text" name="name" id="" value="<?=$row['name'];?>"></div>
+                <div><input type="text" name="name" value="<?=$row['name'];?>"></div>
             </div>
             <div class="form">
                 <div>分級</div>：
@@ -46,7 +46,7 @@ list($year,$month,$day)=explode("-",$row['ondate']);
             <div class="form">
                 <div>片長</div>：
                 <div>
-                    <input type="number" name="length" id="" value="<?=$row['length'];?>">
+                    <input type="number" name="length" value="<?=$row['length'];?>">
                 </div>
             </div>
             <div class="form">
@@ -88,7 +88,7 @@ list($year,$month,$day)=explode("-",$row['ondate']);
             </div>
             <div class="form">
                 <div>電影海報</div>：
-                <div><input type="file" name="" id=""></div>
+                <div><input type="file" name="poster" id=""></div>
             </div>
         </div>
     </div>

@@ -25,8 +25,7 @@
     background: #999;
 }
 </style>
-
-<h3 class="ct">線上訂票</h3>
+<h3 class='ct'>線上訂票</h3>
 <form action="#">
     <table class="order-form">
         <tr>
@@ -53,8 +52,11 @@
 <script>
 getMovies();
 let id = new URLSearchParams(location.href).get('id');
-// console.log(id);
+//console.log(id);
 
+$("#movie").on("change", function() {
+    getDays();
+})
 
 function getMovies() {
     $.get("api/get_movies.php", function(movies) {
@@ -64,6 +66,16 @@ function getMovies() {
         if (parseInt(id) > 0) {
             $(`#movie option[value='${id}']`).prop('selected', true);
         }
+
+        getDays();
+    })
+}
+
+function getDays() {
+    $.get("api/get_days.php", {
+        movie: $("#movie").val()
+    }, function(days) {
+        $("#date").html(days);
     })
 }
 </script>

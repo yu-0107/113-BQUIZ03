@@ -133,7 +133,7 @@ function sliders(next = -1) {
         next = ($(".poster").length == now + 1) ? 0 : now + 1;
     }
     let ani = $(".poster").eq(next).data('ani');
-    console.log(now, next, ani)
+    // console.log(now, next, ani)
     //console.log(now,next)
 
     switch (ani) {

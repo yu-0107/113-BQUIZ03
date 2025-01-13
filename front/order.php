@@ -31,7 +31,7 @@
     <table class="order-form">
         <tr>
             <td>電影：</td>
-            <td><select name="movue" id="movue"></select></td>
+            <td><select name="movie" id="movie"></select></td>
         </tr>
         <tr>
             <td>日期：</td>
@@ -49,3 +49,21 @@
         </tr>
     </table>
 </form>
+
+<script>
+getMovies();
+let id = new URLSearchParams(location.href).get('id');
+// console.log(id);
+
+
+function getMovies() {
+    $.get("api/get_movies.php", function(movies) {
+        console.log(movies);
+        $("#movie").html(movies);
+
+        if (parseInt(id) > 0) {
+            $(`#movie option[value='${id}']`).prop('selected', true);
+        }
+    })
+}
+</script>

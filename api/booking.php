@@ -3,12 +3,6 @@
     width: 540px;
     height: 370px;
     margin: auto;
-    background-image: url("icon/03D04.png");
-    background-position: center;
-    background-repeat: no-repeat;
-    padding: 19px 110px 14px 110px;
-    display: flex;
-    flex-wrap: wrap;
 }
 
 #movieInfo {
@@ -19,9 +13,18 @@
     padding: 10px 100px;
 }
 
+#info {
+    background-image: url("icon/03D04.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    padding: 19px 110px 14px 110px;
+    display: flex;
+    flex-wrap: wrap;
+}
+
 .seat {
     width: 64px;
-    height: 84px;
+    height: 85px;
     text-align: center;
     padding: 2px;
     position: relative;
@@ -41,17 +44,35 @@
     bottom: 2px;
 }
 </style>
-<?php  include_once "db.php";?>
+<?php  include_once "db.php";
+
+$rows=$Order->all(['movie'=>$_GET['name'],'date'=>$_GET['date'],'session'=>$_GET['session']]);
+$seats=[];
+foreach($rows as $row){
+    $tmp=unserialize($row['seats']);
+    $seats=array_merge($seats,$tmp);
+}
+//dd($seats);
+?>
 
 <div id="info">
-    <?php
+    <?php 
         for($i=0;$i<20;$i++){
-            echo "<div class='seat null'>";
-            echo floor($i/5)+1 ."排".($i%5+1)."號";
-            echo "<input type='checkbox' class='chk' value='$i'>";
+            $booked=(in_array($i,$seats))?"booked":"null";
+            echo "<div class='seat $booked'>";
+            /* if(in_array($i,$seats)){
+                echo "<div class='seat booked'>";
+            }else{
+                echo "<div class='seat null'>";
+            } */
+            echo  floor($i/5)+1 ."排".($i%5+1)."號";
+            if(!in_array($i,$seats)){
+                echo "<input type='checkbox' class='chk' value='$i'>";
+            }
             echo "</div>";
         }
     ?>
+
 </div>
 <div id="movieInfo">
     <div>您選擇的電影是：<?=$_GET['name'];?></div>
@@ -63,20 +84,14 @@
     </div>
 
 </div>
-
 <script>
 let seats = new Array();
-// let num = {
-//     1: '一',
-//     2: '二',
-//     3: '三',
-//     4: '四'
-// }
+//let num={1:'一',2:'二',3:'三',4:'四'};
 
 $(".chk").on("change", function() {
     if ($(this).prop('checked')) {
         if (seats.length > 3) {
-            alert("最多只能選四張票")
+            alert("最多只能選四張票");
             $(this).prop('checked', false)
         } else {
             seats.push($(this).val())
@@ -85,17 +100,17 @@ $(".chk").on("change", function() {
         seats.splice(seats.indexOf($(this).val()), 1)
     }
     $("#tickets").text(seats.length)
-    // $("#titckets").text(num[seats.length])
-    // console.log(seats)
+    //$("#tickets").text(num[seats.length])
+    //console.log(seats)
+
 })
 
 function checkout() {
     movie.seats = seats;
-    // console.log(movie);
+    //console.log(movie)
     $.post("api/checkout.php", movie, function(res) {
-        // console.log(res);
+        //console.log(res)
         $("#mm").html(res);
-
     })
 }
 </script>
